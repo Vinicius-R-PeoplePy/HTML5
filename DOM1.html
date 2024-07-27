@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros passos com DOM</title>
+</head>
+<body>
+    <h1>Iniciando estudos DOM</h1>
+    <p>Aqui vai o resultado</p>
+    <p>Aprendendo a usar o <strong>DOM</strong> em JavaScript.</p>
+    <p>Document <br> Object <br> Model </p>
+    <p>Árvore DOM --- window - location - document - history --- html - head - body - meta - title - h1 - p - div - strong - etc... </p>
+
+    <div id="msg">Clique em mim</div>
+    <br>
+    <div name="msg">Não clique em mim</div>
+    <br>
+    <div id="dns">Domain Name System</div>
+    <br>
+    <script>
+        var corpo = window.document.body
+        var p1 = window.document.getElementsByTagName('p')[0]
+        window.document.write(window.navigator.appName)
+        var d = document.getElementById("msg") // selecionando div id... 
+        d.style.background = 'green'
+        d.innerText = 'Estou aguardando...'
+        var d2 = document.getElementsByName('msg')[0]
+        d2.innerText = "Loading..."
+        var d3 = document.querySelector('div#dns')
+        d3.style.background = 'pink'
+        // id = # ... classe = . 
+    </script>
+    <br>
+    <br>
+    <script>
+        var p1 = document.getElementsByTagName('p')[1]
+        document.write('Está escrito assim: ', p1.innerHTML)
+        corpo.style.background = 'aqua'
+        p1.style.color = 'blue'
+        window.alert(p1.innerText)
+    </script>
+    
+    <!-- 
+    Selecionando... 
+    -->
+</body>
+</html>

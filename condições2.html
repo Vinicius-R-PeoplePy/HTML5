@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checar nacionalidade</title>
+</head>
+<body>
+    <h1>Bem-vindo</h1>
+    <!-- a.addEventListener('onmouseenter', 'checar')
+    function checar () {
+        var a = document.getElementById('área')
+        a.Innertxt = 'Clique para checar nacionalidade'}
+        #<p>Clique para checar nacionalidade</p>
+        #atenção, erros de digitação... -->
+    
+</body>
+    <script>
+        var a = document.querySelector('h1')
+        a.addEventListener('onmouseenter', checar) // 2º parâmetro sem aspas!
+
+        function checar () {
+            var a = document.getElementById('área')
+            a.innerText = 'Clique para checar nacionalidade'
+        }
+
+    </script>
+</html>

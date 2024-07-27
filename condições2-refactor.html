@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checar nacionalidade</title>
+</head>
+<body>
+    <h1>Bem-vindo</h1>
+    <div id='área'></div>
+    <select name="País" id="countries">
+        <option value="">Selecione um país</option>
+    </select>
+    <input type="button" name="btn1" id="btn1" value="Confirma" onclick="clicar()">
+    <script>
+        var a = document.querySelector('h1');
+        
+        a.addEventListener('mouseenter', checar); // 2º parâmetro sem aspas!
+        // mouseenter, não onmouseenter
+        a.addEventListener('mouseleave', sair);
+
+        // Fetch and populate country options 
+        fetch('https://restcountries.com/v3.1/all')
+            .then(response => response.json())
+            .then(data => { 
+                var select = document.getElementById('countries');
+                data.forEach(country => { 
+                    var option = document.createElement('option');
+                    option.value = country.cca2; // Country code
+                    option.textContent = country.name.common; // Country name 
+                    select.appendChild(option);
+                });
+            });
+
+        function checar() {
+            a.innerText = 'Clique para checar nacionalidade';
+            a.style.backgroundColor = 'green'
+            a.style.color = 'white'
+        }
+
+        function clicar() {
+            var país = document.getElementById('countries').options[document.getElementById('countries').selectedIndex].text;
+            var área = document.getElementById('área');
+        
+            if (país) {
+                área.innerText =  `vivendo em ${país}`;
+            } else {
+                área.innerText = 'Por favor, selecione um país.'
+            }
+            
+        }
+        function sair() { 
+            a.innerText = 'Bem-vindo';
+             a.style.backgroundColor = 'white';
+             a.style.color = 'black';
+        }
+
+    </script>
+</body>
+</html>
