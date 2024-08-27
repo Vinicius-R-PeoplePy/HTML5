@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Fundamentals Quiz</title>
+    <style>
+        .hidden { display: none; }/* class selector; target any html element that has such class name */
+        .disabled { background-color: gray; cursor: not-allowed; }
+        .btn { padding: 10px 20px; margin: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Python Fundamentals Quiz</h1>
+    <div id="quiz-container"></div>
+        <div id="question-container">
+            <p id="question-text"></p>
+            <select id="answer-select"></select>
+                <option value="">Select your answer</option>
+                <!-- Options will be dynamically added here -->
+            </select>
+        </div>
+        <div id="button-container">
+            <button id="prev-button" class="btn">Previous Question</button>
+            <button id="next-button" class="btn disabled">Next Question</button>
+        <div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the correct syntax to output 'Hello, World' in Python?",
+                choices: ["echo 'Hello, World'", "print('Hello, World')", "cout << 'Hello, World'", "console.log('Hello, World')", "System.out.println('Hello, World')"],
+                correct: "print('Hello, World')"
+            },
+            {
+                question: "How do you insert comments in Python code?",
+                choices: ["// This is a comment", "# This is a comment", "<!-- This is a comment -->", "/* This is a comment */", "-- This is a comment"],
+                correct: "# This is a comment"
+            },
+            // ... [Add all other questions similarly]
+        ];
+
+        let currentQuestionIndex = 0; 
+
+        function loadQuestion() {
+            const questionText = document.getElementById("question-text");
+            const answerSelect = document.getElementById("answer-select");
+
+            // Load the current question and choices 
+            questionText.textContent = questions[currentQuestionIndex].question;
+            answerSelect.innerHTML = '<option value="">Select your answer</options>';
+                questions[currentQuestionIndex].choices.forEach(choice => { 
+                    const option = document.createElement("option");
+                    option.value = choice; 
+                    option.textContent = choice;
+                    answerSelect.appendChild(option);
+                });
+
+                /// Disable Next button initially
+                document.getElementById("next-button").classList.add("disabled");
+        }
+        function checkAnswer()  {
+            const answerSelect = document.getElementById("answer-select");
+            const selectedAnswer = answerSelect.value;
+
+            if (selectedAnswer === "") {
+                alert("You can't advance! Please, give an answer!");
+                return;
+            }
+
+            if (selectedAnswer === questions[currentQuestionIndex].correct) {
+                alert("Good job, you can continue!");
+                document.getElementById("next-button").classList.remove("disabled");
+            } else { 
+                alert("Error, wrong answer!");
+            }
+        }
+
+        document.getElementById("next-button").addEventListener("click", function() {
+            if (this.classList.contains("disabled")) {
+                alert("You can't advance! PLease, give an answer!");
+            } else {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else { 
+                    alert("Quiz completed!");
+                }
+            }
+        });
+
+        document.getElementById("prev-button").addEventListener("click", function() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        });
+
+        document.getElementById("answer-select").addEventListener("change", checkAnswer);
+
+        // Load the first question when the page loads 
+        window.onload = loadQuestion;
+    </script>
+</body>
+</html>
